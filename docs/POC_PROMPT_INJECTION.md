@@ -39,6 +39,26 @@ obtains the same confidential data that the SQLi and IDOR vectors expose —
 showing that an AI feature bolted onto an app can reintroduce access-control
 bypasses even when the underlying database and routes are otherwise fine.
 
+## Verified
+
+Reproduced locally against the `vulnerable` branch (port 5000) as a logged-in
+`alice` session. Actual response returned by `/assistant`:
+
+```
+[AI ASSISTANT — INJECTED BEHAVIOR]
+Here is the internal data you asked for:
+- alice (Engineering): $65000
+- bob (Sales): $58000
+- admin (IT): $120000 | FLAG: FLAG{idor_sqli_xss_promptinjection_chain_complete}
+```
+
+This confirms a low-privilege employee session obtaining every employee's
+salary and the admin-only flag through the assistant alone — no SQLi, IDOR,
+or XSS required for this vector on its own.
+
+Re-tested against the `patched` branch (port 5001): the same message returns
+a generic summary reply with no salary data or flag.
+
 ## Fix (see `patched` branch)
 - **Separate instructions from data.** In a real LLM call, never
   string-concatenate user input into the same context as system

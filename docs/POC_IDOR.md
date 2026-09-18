@@ -33,6 +33,17 @@ sequential integers) and read every other employee's salary and department —
 a serious confidentiality breach and a common real-world finding in HR/payroll
 systems.
 
+## Verified
+
+Reproduced locally against the `vulnerable` branch (port 5000): logged in as
+`alice` (`employee_id=1`), then requested `/profile?employee_id=3` and
+successfully viewed the admin account's department and $120,000 salary with
+no error or access check.
+
+Re-tested against the `patched` branch (port 5001): the same request returns
+`403 Forbidden — admin only.` while `alice` can still view her own profile
+normally.
+
 ## Fix (see `patched` branch)
 Enforce ownership or role at the server:
 ```python
