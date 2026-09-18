@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Employee Login</h2>
+{% if error %}<p class="error">{{ error }}</p>{% endif %}
+<form method="POST">
+  <label>Username</label>
+  <input type="text" name="username" autocomplete="off">
+  <label>Password</label>
+  <input type="password" name="password">
+  <button type="submit">Log in</button>
+</form>
+<p style="font-size:12px;color:#888">Demo accounts: alice/alice123, bob/bob123</p>
+{% endblock %}

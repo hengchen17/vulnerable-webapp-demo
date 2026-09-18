@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Employee Profile</h2>
+<p><span class="badge">ID: {{ user['id'] }}</span> <span class="badge">{{ user['role'] }}</span></p>
+<table>
+  <tr><td><strong>Username</strong></td><td>{{ user['username'] }}</td></tr>
+  <tr><td><strong>Department</strong></td><td>{{ user['department'] }}</td></tr>
+  <tr><td><strong>Salary</strong></td><td>${{ user['salary'] }}</td></tr>
+</table>
+<p style="font-size:12px;color:#888">Try changing the employee_id in the URL...</p>
+{% endblock %}
